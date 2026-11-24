@@ -1,0 +1,23 @@
+---
+layout: runbook
+title: 'Two date problems in ticket #4471'
+owner: support desk
+status: reviewed
+reviewed: 2026-11-23
+signature: 'Codex · S01E03'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+The shared parser interprets day-first dates month first. R-41200 records 7 April becoming 4 July. Booking v3 has a separate problem: its hint says MM/DD/YYYY even when the form reads the tenant’s day-first order. R-41230 records 6 January becoming 1 June.
+
+Count each report ID once, then use the tenant locale, form version and report channel to assign its cause. The browser-based intake tags disagree with that classification in both directions.
+
+<CauseTable ticket={4471} />
+
+Review the one-day moves separately before closing the parser ticket. A one-day shift is a different symptom from a month/day swap.
+
+<RenderStamp {signature} />
